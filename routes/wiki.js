@@ -29,8 +29,10 @@ router.get("/", (req, res, next) => {
 
 // POST /wiki/
 router.post("/", (req, res, next) => {
-
     let user;
+
+    req.body.tags = req.body.tags.split(",").map(t => t.trim());
+    
     User.findOrCreate({
         where: {
             name: req.body.name,

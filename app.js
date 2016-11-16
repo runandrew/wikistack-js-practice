@@ -40,7 +40,7 @@ app.engine("html", nunjucks.render);
 app.use(express.static("public"));
 
 // Server initialize
-Promise.all([User.sync(), Page.sync()])
+Promise.all([User.sync({}), Page.sync({})])
     .then(() => {
         app.listen(3001, () => {
             console.log("Server is listening on port 3001!");

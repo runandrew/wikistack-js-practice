@@ -28,6 +28,10 @@ const Page = db.define("page", {
     date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
+    },
+    tags: {
+        type: Sequelize.ARRAY(Sequelize.TEXT),
+        defaultValue: []
     }
 }, {
     // getterMethods: {

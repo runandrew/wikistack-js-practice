@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
 const path = require("path");
+const Promise = require("bluebird");
 
 // Setup models
 const models = require("./models");
@@ -14,6 +15,7 @@ const User = models.User;
 
 // Setup routes
 const wikiRoute = require("./routes/wiki");
+const usersRoute = require("./routes/users");
 
 // App instanciation
 const app = express();
@@ -26,6 +28,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/wiki", wikiRoute);
+app.use("/users", usersRoute);
 
 // Nunjucks
 const env = nunjucks.configure("views", {noCache: true});
@@ -37,10 +40,7 @@ app.engine("html", nunjucks.render);
 app.use(express.static("public"));
 
 // Server initialize
-User.sync({ force: true })
-    .then(() => {
-        return Page.sync({ force: true });
-    })
+Promise.all([User.sync(), Page.sync()])
     .then(() => {
         app.listen(3001, () => {
             console.log("Server is listening on port 3001!");

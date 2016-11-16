@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3>User page: {{ user.name }}<small> (<a href="PLACEHOLDER_URL_TITLE/similar">Similar</a>)</small></h3>
+<div>PLACEHOLDER TAG LIST</div>
+<hr/>
+<div class="page-body">
+    <h4>My pages</h2>
+    <ul class="list-unstyled">
+        {% for page in pages %}
+        <li><a href="/users/{{ user.id }}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<hr/>
+<a href="PLACEHOLDER_URL_TITLE/edit" class="btn btn-primary">edit this page</a>
+<a href="PLACEHOLDER_URL_TITLE/delete" class="btn btn-danger">delete this page</a>
+{% endblock %}

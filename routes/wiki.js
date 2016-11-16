@@ -66,10 +66,7 @@ router.get("/:urlTitle", (req, res, next) => {
         if (page === null) {
             res.status(404).send();
         } else {
-            //console.log("OUTPUT__________\n", { page });
-            res.render("wikipage", { // try sequelize.get({plain: true})
-                page
-            });
+            res.render("wikipage", page.get({ plain: true }));
         }
 
     })

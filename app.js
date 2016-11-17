@@ -32,6 +32,8 @@ app.use("/users", usersRoute);
 
 // Nunjucks
 const env = nunjucks.configure("views", {noCache: true});
+const AutoEscapeExtension = require("nunjucks-autoescape")(nunjucks);
+env.addExtension('AutoEscapeExtension', new AutoEscapeExtension(env));
 app.use(express.static("public"));
 app.set("view engine", "html");
 app.engine("html", nunjucks.render);

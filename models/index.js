@@ -2,6 +2,7 @@
 
 // Required modules
 const Sequelize = require("sequelize");
+const marked = require("marked");
 
 // Connect to database
 const db = new Sequelize("postgres://localhost:5432/wikistack-practice", {
@@ -34,12 +35,9 @@ const Page = db.define("page", {
         defaultValue: []
     }
 }, {
-    // getterMethods: {
-    //     route: () => { return "/wiki/" + this.urlTitle; }
-    // },
-    // This = {} using es6 arrow function
     getterMethods: {
-        route : function()  { return "/wiki/" + this.urlTitle; }
+        route : function()  { return "/wiki/" + this.urlTitle; },
+        renderedContent: function() { return marked(this.content); }
     },
     hooks: {
         beforeValidate: (page) => {

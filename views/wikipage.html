@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h3>{{ title }}<small> (<a href="PLACEHOLDER_URL_TITLE/similar">Similar</a>)</small></h3>
+<h3>{{ title }}<small> (<a href="{{ route }}/similar">Similar</a>)</small></h3>
 <h4>by <a href="/users/{{ author.id }}">{{ author.name }}</a></h4>
 <div>
     <ul>

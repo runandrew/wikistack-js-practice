@@ -45,6 +45,31 @@ const Page = db.define("page", {
         beforeValidate: (page) => {
             page.urlTitle = generateUrlTitle(page.title);
         }
+    },
+    classMethods: {
+        findByTag: function(tag) {
+            return this.findAll({
+                where: {
+                    tags: {
+                        $contains: [tag]
+                    }
+                }
+            });
+        }
+    },
+    instanceMethods: {
+        findSimilar: function() {
+            return Page.findAll({
+                where: {
+                    id: {
+                        $ne: this.id
+                    },
+                    tags: {
+                        $overlap: this.tags
+                    }
+                }
+            });
+        }
     }
 });
 
